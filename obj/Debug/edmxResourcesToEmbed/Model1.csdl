@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Doc">
+    <Key>
+      <PropertyRef Name="kodDoca" />
+    </Key>
+    <Property Name="kodDoca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIODoc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="kodSpec" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="birthDoc" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PhoneDoc" Type="Int32" Nullable="false" />
+    <Property Name="Kabinet" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Zapis" Relationship="Self.FK_Zapis_Doc" FromRole="Doc" ToRole="Zapis" />
+  </EntityType>
+  <EntityType Name="Pacient">
+    <Key>
+      <PropertyRef Name="kodPacienta" />
+    </Key>
+    <Property Name="kodPacienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Snils" Type="Int32" Nullable="false" />
+    <Property Name="FIOPacient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Birth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Zapis" Relationship="Self.FK_Zapis_Pacient" FromRole="Pacient" ToRole="Zapis" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="IdUs" />
+    </Key>
+    <Property Name="IdUs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zapis">
+    <Key>
+      <PropertyRef Name="kodZapis" />
+    </Key>
+    <Property Name="kodZapis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datetimeZapis" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="kodDoca" Type="Int32" Nullable="false" />
+    <Property Name="kodPacienta" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Doc" Relationship="Self.FK_Zapis_Doc" FromRole="Zapis" ToRole="Doc" />
+    <NavigationProperty Name="Pacient" Relationship="Self.FK_Zapis_Pacient" FromRole="Zapis" ToRole="Pacient" />
+  </EntityType>
+  <Association Name="FK_Zapis_Doc">
+    <End Role="Doc" Type="Self.Doc" Multiplicity="1" />
+    <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doc">
+        <PropertyRef Name="kodDoca" />
+      </Principal>
+      <Dependent Role="Zapis">
+        <PropertyRef Name="kodDoca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zapis_Pacient">
+    <End Role="Pacient" Type="Self.Pacient" Multiplicity="1" />
+    <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacient">
+        <PropertyRef Name="kodPacienta" />
+      </Principal>
+      <Dependent Role="Zapis">
+        <PropertyRef Name="kodPacienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Doc" EntityType="Self.Doc" />
+    <EntitySet Name="Pacient" EntityType="Self.Pacient" />
+    <EntitySet Name="user" EntityType="Self.user" />
+    <EntitySet Name="Zapis" EntityType="Self.Zapis" />
+    <AssociationSet Name="FK_Zapis_Doc" Association="Self.FK_Zapis_Doc">
+      <End Role="Doc" EntitySet="Doc" />
+      <End Role="Zapis" EntitySet="Zapis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zapis_Pacient" Association="Self.FK_Zapis_Pacient">
+      <End Role="Pacient" EntitySet="Pacient" />
+      <End Role="Zapis" EntitySet="Zapis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

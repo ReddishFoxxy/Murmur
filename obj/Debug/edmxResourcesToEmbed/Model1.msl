@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Doc">
+      <EntityTypeMapping TypeName="Model.Doc">
+        <MappingFragment StoreEntitySet="Doc">
+          <ScalarProperty Name="kodDoca" ColumnName="kodDoca" />
+          <ScalarProperty Name="FIODoc" ColumnName="FIODoc" />
+          <ScalarProperty Name="kodSpec" ColumnName="kodSpec" />
+          <ScalarProperty Name="birthDoc" ColumnName="birthDoc" />
+          <ScalarProperty Name="PhoneDoc" ColumnName="PhoneDoc" />
+          <ScalarProperty Name="Kabinet" ColumnName="Kabinet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacient">
+      <EntityTypeMapping TypeName="Model.Pacient">
+        <MappingFragment StoreEntitySet="Pacient">
+          <ScalarProperty Name="kodPacienta" ColumnName="kodPacienta" />
+          <ScalarProperty Name="Snils" ColumnName="Snils" />
+          <ScalarProperty Name="FIOPacient" ColumnName="FIOPacient" />
+          <ScalarProperty Name="Birth" ColumnName="Birth" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="Model.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="IdUs" ColumnName="IdUs" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zapis">
+      <EntityTypeMapping TypeName="Model.Zapis">
+        <MappingFragment StoreEntitySet="Zapis">
+          <ScalarProperty Name="kodZapis" ColumnName="kodZapis" />
+          <ScalarProperty Name="datetimeZapis" ColumnName="datetimeZapis" />
+          <ScalarProperty Name="kodDoca" ColumnName="kodDoca" />
+          <ScalarProperty Name="kodPacienta" ColumnName="kodPacienta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

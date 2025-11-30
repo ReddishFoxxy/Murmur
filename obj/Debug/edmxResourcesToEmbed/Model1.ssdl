@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Doc">
+    <Key>
+      <PropertyRef Name="kodDoca" />
+    </Key>
+    <Property Name="kodDoca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIODoc" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="kodSpec" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="birthDoc" Type="date" Nullable="false" />
+    <Property Name="PhoneDoc" Type="int" Nullable="false" />
+    <Property Name="Kabinet" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pacient">
+    <Key>
+      <PropertyRef Name="kodPacienta" />
+    </Key>
+    <Property Name="kodPacienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Snils" Type="int" Nullable="false" />
+    <Property Name="FIOPacient" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Birth" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="IdUs" />
+    </Key>
+    <Property Name="IdUs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zapis">
+    <Key>
+      <PropertyRef Name="kodZapis" />
+    </Key>
+    <Property Name="kodZapis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datetimeZapis" Type="datetime" Nullable="false" />
+    <Property Name="kodDoca" Type="int" Nullable="false" />
+    <Property Name="kodPacienta" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Zapis_Doc">
+    <End Role="Doc" Type="Self.Doc" Multiplicity="1" />
+    <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doc">
+        <PropertyRef Name="kodDoca" />
+      </Principal>
+      <Dependent Role="Zapis">
+        <PropertyRef Name="kodDoca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zapis_Pacient">
+    <End Role="Pacient" Type="Self.Pacient" Multiplicity="1" />
+    <End Role="Zapis" Type="Self.Zapis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacient">
+        <PropertyRef Name="kodPacienta" />
+      </Principal>
+      <Dependent Role="Zapis">
+        <PropertyRef Name="kodPacienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище ModelContainer">
+    <EntitySet Name="Doc" EntityType="Self.Doc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pacient" EntityType="Self.Pacient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zapis" EntityType="Self.Zapis" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Zapis_Doc" Association="Self.FK_Zapis_Doc">
+      <End Role="Doc" EntitySet="Doc" />
+      <End Role="Zapis" EntitySet="Zapis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zapis_Pacient" Association="Self.FK_Zapis_Pacient">
+      <End Role="Pacient" EntitySet="Pacient" />
+      <End Role="Zapis" EntitySet="Zapis" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,168 @@
+﻿<Window x:Class="PolZhelnov.User"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Мои записи — Поликлиника" 
+        Height="700" 
+        Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F8F9FA">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Мои записи на приём"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="8"
+                    Padding="15"
+                    Margin="0,0,12,0"
+                    BorderBrush="#CED4DA"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Выберите запись"
+                               FontWeight="SemiBold"
+                               FontSize="16"
+                               Foreground="#495057"
+                               Margin="0,0,0,10"/>
+
+                    <TextBox x:Name="SearchBox"
+                             Grid.Row="1"
+                             Margin="0,0,0,10"
+                             Padding="6,4"
+                             FontSize="14"
+                             BorderBrush="#DEE2E6"
+                             Background="White"
+                             TextChanged="SearchBox_TextChanged"
+                             VerticalContentAlignment="Center" />
+
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,15">
+                        <Button Content="А → Я"
+                                Click="SortAsc_Click"
+                                Background="#E9ECEF"
+                                Foreground="#212529"
+                                Padding="8,4"
+                                FontSize="12"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Margin="0,0,6,0"/>
+                        <Button Content="Я → А"
+                                Click="SortDesc_Click"
+                                Background="#E9ECEF"
+                                Foreground="#212529"
+                                Padding="8,4"
+                                FontSize="12"
+                                BorderThickness="0"
+                                Cursor="Hand"/>
+                    </StackPanel>
+
+                    <ListBox x:Name="ZapisiList"
+                             Grid.Row="3"
+                             SelectionChanged="ZapisiList_SelectionChanged"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             FontSize="14"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="10,8"
+                                        Background="White"
+                                        Margin="0,0,0,6"
+                                        CornerRadius="4"
+                                        BorderBrush="#E9ECEF"
+                                        BorderThickness="1">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Pacient.FIOPacient}" 
+                                                   FontWeight="Bold" 
+                                                   Foreground="#212529"/>
+                                        <TextBlock Text="{Binding Doc.FIODoc}" 
+                                                   FontStyle="Italic" 
+                                                   Foreground="#495057"/>
+                                        <TextBlock Text="{Binding datetimeZapis, StringFormat='dd.MM.yyyy HH:mm'}" 
+                                                   Foreground="#6C757D"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Background="White"
+                    CornerRadius="8"
+                    Padding="25"
+                    Margin="12,0,0,0"
+                    BorderBrush="#CED4DA"
+                    BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="Информация о записи"
+                               FontWeight="SemiBold"
+                               FontSize="18"
+                               Foreground="#495057"
+                               Margin="0,0,0,25"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Дата и время:" 
+                                   Foreground="#495057"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,15,12"/>
+                        <TextBox x:Name="DateTimeZap"
+                                 Grid.Column="1"
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"
+                                 BorderBrush="#DEE2E6"
+                                 FontSize="14"
+                                 Padding="8,6"
+                                 Margin="0,0,0,12"/>
+
+                        <TextBlock Text="Врач:" 
+                                   Grid.Row="1"
+                                   Foreground="#495057"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,15,0"/>
+                        <TextBox x:Name="comboDoci"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 IsReadOnly="True"
+                                 Background="#F8F9FA"
+                                 BorderBrush="#DEE2E6"
+                                 FontSize="14"
+                                 Padding="8,6"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
