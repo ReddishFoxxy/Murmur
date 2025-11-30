@@ -30,7 +30,7 @@ private void Avtorizatiya(object sender, RoutedEventArgs e)
         {
         
             string m_aut = "Авторизация";
-            string m_error = "Ошибка! Проверьте правильность данных";
+            string m_error = "Ошибка! Проверьте правильность данных: ";
 
             if (textBox_login.Text != "" && textBox_login.Text != null ||
                 passwordBox_password.Password != "" && passwordBox_password.Password != null)

@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Поликлиника — Управление записями"
+        <TextBlock Text="Поликлиника — Управление"
                    FontSize="24"
                    FontWeight="Bold"
                    Foreground="#2C3E50"
